@@ -1,6 +1,8 @@
-Item: {{localStorageItem | json}}
+Local: {{localStorageItem | json}} <br>
+Cross: {{crossDomainItem | json}} <br>
 
-<button (click)="getFromLocalStorage()">Get from localStorage</button>
-
-<button (click)="addToLocalStorage()">Add to localStorage</button>
-
+<button (click)="setLocalStorage()">set local</button>
+<button (click)="getLocalStorage()">get local</button>
+<br>
+<button (click)="setCrossStorage()">set cross</button>
+<button (click)="getCrossStorage()">get cross</button>
