@@ -9,36 +9,20 @@ declare let CrossStorageClient: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  localStorageItem: string;
   crossDomainItem: string;
   crossStorage: any;
 
   constructor() {
     CrossStorageHub.init([
-      { origin: /localhost:4200$/, allow: ['get', 'set', 'del', 'getKeys', 'clear'] },
-      { origin: /localhost:3000$/, allow: ['get', 'set', 'del', 'getKeys', 'clear'] }
+      { origin: /localhost:4200$/, allow: ['set'] },
+      { origin: /localhost:3000$/, allow: ['get', 'getKeys'] }
     ]);
     this.crossStorage = new CrossStorageClient('http://localhost:3000/hub.html');
-
-  }
-
-  getLocalStorage() {
-    this.localStorageItem = localStorage.getItem('local-item');
   }
 
   getCrossStorage() {
     this.crossDomainItem = this.crossStorage.onConnect().then(() => {
       return this.crossStorage.get('cross-domain-item');
-    });
-  }
-
-  setLocalStorage() {
-    localStorage.setItem('local-item', 'app22222 item local');
-  }
-
-  setCrossStorage() {
-    this.crossStorage.onConnect().then(() => {
-      return this.crossStorage.set('cross-domain-item', 'app22222222 item compartilhado');
     });
   }
 }
